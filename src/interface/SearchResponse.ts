@@ -1,5 +1,5 @@
 export interface SearchResponse {
-  results: Array<SearchResult>;
+  results: ReadonlyArray<SearchResult>;
 }
 
 export interface SearchResult {
