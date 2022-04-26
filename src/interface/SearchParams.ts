@@ -4,5 +4,10 @@ export interface SearchParams {
 
 interface Filter {
   property: string;
-  value: string;
+  value?: string;
+  select?: FilterSelect;
+}
+
+export interface FilterSelect {
+  is_not_empty?: boolean;
 }

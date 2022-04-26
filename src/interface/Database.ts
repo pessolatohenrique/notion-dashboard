@@ -15,7 +15,7 @@ export interface DatabaseResponse {
   title: string;
   url: string;
   archived: boolean;
-  properties?: Record<string, DatabasePropertyItem>;
+  properties?: Array<DatabasePropertyItem>;
 }
 
 export interface DatabasePropertyItem {
@@ -25,8 +25,13 @@ export interface DatabasePropertyItem {
   select?: Array<DatabaseOptionsItem>;
 }
 
-interface DatabaseOptionsItem {
+export interface DatabaseOptionsItem {
   id: string;
   name: string;
-  color: string;
+  color?: string;
+}
+
+export interface DatabaseQueryResult {
+  object: string;
+  results: Array<DatabaseResult>;
 }
