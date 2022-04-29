@@ -34,7 +34,10 @@ export class Database implements Printable {
     const dataResponseCopy: DatabaseResult = Object.assign({}, dataResponse);
 
     for (let key in dataResponse.properties) {
+      dataResponse.properties[key].property_name = key;
       if (dataResponse.properties[key].type === "select") {
+        dataResponse.properties[key].property_value =
+          dataResponse.properties[key].select.name;
         dataResponseList.push(dataResponse.properties[key]);
       }
     }
