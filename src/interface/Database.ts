@@ -35,3 +35,23 @@ export interface DatabaseQueryResult {
   object: string;
   results: Array<DatabaseResult>;
 }
+
+export interface DatabaseGroupItem {
+  id: string | any;
+  name: string;
+  property_name: string;
+  property_value: string;
+}
+
+export interface DatabaseSummarized {
+  result: Array<DatabaseItemSummarized>;
+}
+
+export interface DatabaseItemSummarized {
+  key: string;
+  values: Array<DatabaseItemSummaridedResult>;
+}
+
+export interface DatabaseItemSummaridedResult {
+  [key: string]: number;
+}
