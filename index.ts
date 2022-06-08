@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const routes = require("./src/routes");
 import RequestHelper from "./src/utils/RequestHelper";
+import RedisWrapper from "./src/config/RedisWrapper";
 require("dotenv").config();
 
 app.listen(3000, () => {
@@ -10,6 +11,7 @@ app.listen(3000, () => {
 });
 
 RequestHelper.initializeAxios();
+new RedisWrapper();
 routes(app);
 
 module.exports = app;
