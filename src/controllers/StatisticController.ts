@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { DetailRequest } from "../interface/DetailRequest";
 import { Statistic } from "../models/Statistic";
 import RedisWrapper from "../config/RedisWrapper";
@@ -7,8 +7,9 @@ import { DatabaseSummarized } from "../interface/Database";
 export class StatisticController {
   static async index(
     req: Request<DetailRequest>,
-    res: Response
-  ): Promise<Response> {
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const statisticModel = new Statistic();
 
@@ -29,8 +30,8 @@ export class StatisticController {
       await statisticModel.generate(req.params.id);
       redisWrapper.setWithParse(cacheKey, statisticModel.response);
       return res.status(200).json(statisticModel.response);
-    } catch (e) {
-      return res.status(500).json(e);
+    } catch (error) {
+      return next(error);
     }
   }
 }

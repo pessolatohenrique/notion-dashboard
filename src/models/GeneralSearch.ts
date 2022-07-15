@@ -2,6 +2,7 @@ import axios from "axios";
 import { Printable } from "../interface/Printable";
 import { SearchParams } from "../interface/SearchParams";
 import { SearchResponse, ItemResult } from "../interface/SearchResponse";
+import { APIError } from "../utils/ErrorHandle";
 
 export class GeneralSearch implements Printable {
   private _query: SearchParams = {
@@ -18,17 +19,24 @@ export class GeneralSearch implements Printable {
   }
 
   async searchAndMap(): Promise<void> {
-    const apiResponse = await axios.post(`/search`, { ...this._query });
-    this._response = {
-      results: [...apiResponse.data.results].map((item: ItemResult) => {
-        return {
-          id: item.id,
-          title: item.title[0].plain_text,
-          url: item.url,
-          archived: item.archived,
-        };
-      }),
-    };
+    try {
+      const apiResponse = await axios.post(`/search`, { ...this._query });
+      this._response = {
+        results: [...apiResponse.data.results].map((item: ItemResult) => {
+          return {
+            id: item.id,
+            title: item.title[0].plain_text,
+            url: item.url,
+            archived: item.archived,
+          };
+        }),
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new APIError(error.message, 400, error.message);
+      }
+      throw new APIError();
+    }
   }
 
   showText(): void {
