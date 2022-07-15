@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const routes = require("./src/routes");
+import { Request, Response, NextFunction } from "express";
 import RequestHelper from "./src/utils/RequestHelper";
 import RedisWrapper from "./src/config/RedisWrapper";
+import { APIError } from "./src/utils/ErrorHandle";
 require("dotenv").config();
 
 const app = express();
@@ -16,5 +18,12 @@ app.listen(3000, () => {
 RequestHelper.initializeAxios();
 new RedisWrapper();
 routes(app);
+
+app.use(
+  async (error: APIError, req: Request, res: Response, next: NextFunction) => {
+    res.status(error.getStatusCode()).json(error);
+    return next();
+  }
+);
 
 module.exports = app;

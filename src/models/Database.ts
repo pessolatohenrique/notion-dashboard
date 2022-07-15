@@ -5,6 +5,7 @@ import {
   DatabaseResult,
   DatabasePropertyItem,
 } from "../interface/Database";
+import { APIError } from "../utils/ErrorHandle";
 
 export class Database implements Printable {
   private _response: DatabaseResponse = {
@@ -15,18 +16,30 @@ export class Database implements Printable {
   };
 
   async search(id: String): Promise<void> {
-    const apiResponse = await axios.get(`/databases/${id}`);
-    const dataResponse: DatabaseResult = apiResponse.data;
+    try {
+      const apiResponse = await axios.get(`/databases/${id}`);
+      const dataResponse: DatabaseResult = apiResponse.data;
 
-    const dataResponseFiltered = this.filterTypeSelect(dataResponse);
+      const dataResponseFiltered = this.filterTypeSelect(dataResponse);
 
-    this._response = {
-      id: dataResponseFiltered.id,
-      title: dataResponseFiltered.title[0].plain_text,
-      url: dataResponseFiltered.url,
-      archived: dataResponseFiltered.archived,
-      properties: dataResponseFiltered.properties,
-    };
+      this._response = {
+        id: dataResponseFiltered.id,
+        title: dataResponseFiltered.title[0].plain_text,
+        url: dataResponseFiltered.url,
+        archived: dataResponseFiltered.archived,
+        properties: dataResponseFiltered.properties,
+      };
+    } catch (error) {
+      if (this._response.title === "") {
+        throw new APIError("No content", 204);
+      }
+
+      if (error instanceof Error) {
+        throw new APIError(error.message, 400, error.message);
+      }
+
+      throw new APIError();
+    }
   }
 
   filterTypeSelect(dataResponse: DatabaseResult): DatabaseResult {
