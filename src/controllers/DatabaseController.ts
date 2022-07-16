@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { DetailRequest } from "../interface/DetailRequest";
 import { Database } from "../models/Database";
 import { LogGenerator } from "../utils/LogGenerator";
-import { APIError } from "../utils/ErrorHandle";
 
 export class DatabaseController {
   static async show(
