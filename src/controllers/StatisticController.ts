@@ -3,6 +3,7 @@ import { DetailRequest } from "../interface/DetailRequest";
 import { Statistic } from "../models/Statistic";
 import RedisWrapper from "../config/RedisWrapper";
 import { DatabaseSummarized } from "../interface/Database";
+import log4js = require("log4js");
 
 export class StatisticController {
   static async index(
@@ -12,6 +13,7 @@ export class StatisticController {
   ) {
     try {
       const statisticModel = new Statistic();
+      const logger = log4js.getLogger();
 
       const { fromCache } = req.query;
       const redisWrapper = new RedisWrapper<DatabaseSummarized>();
@@ -29,6 +31,8 @@ export class StatisticController {
 
       await statisticModel.generate(req.params.id);
       redisWrapper.setWithParse(cacheKey, statisticModel.response);
+
+      logger.info(statisticModel.response);
       return res.status(200).json(statisticModel.response);
     } catch (error) {
       return next(error);
