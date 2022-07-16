@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Notion Dashboard",
+    "description": "O objetivo deste projeto é fornecer gráficos e estatísticas a partir de quadros do Notion",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "tags": [],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/search": {
+      "get": {
+        "tags": ["Search"],
+        "description": "Lista os Databases associados para aquele usuário, na plataforma do Notion",
+        "parameters": [
+          {
+            "name": "fromCache",
+            "in": "query",
+            "required": false,
+            "description": "Feature flag para verificar se os dados serão buscados via cache",
+            "type": "boolean"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Error"
+          }
+        }
+      }
+    },
+    "/database/{id}": {
+      "get": {
+        "tags": ["Database"],
+        "description": "Exibe detalhes de um Database, especialmente as propriedades associadas",
+        "parameters": [
+          {
+            "name": "fromCache",
+            "in": "query",
+            "required": false,
+            "description": "Feature flag para verificar se os dados serão buscados via cache",
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do Database",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Error"
+          }
+        }
+      }
+    },
+    "/statistic/{id}": {
+      "get": {
+        "tags": ["Statistic"],
+        "description": "Exibe as estatísticas, via chave-valor, para um Database",
+        "parameters": [
+          {
+            "name": "fromCache",
+            "in": "query",
+            "required": false,
+            "description": "Feature flag para verificar se os dados serão buscados via cache",
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do Database",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "description": "Internal Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

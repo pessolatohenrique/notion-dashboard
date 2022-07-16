@@ -3,8 +3,10 @@ const cors = require("cors");
 const routes = require("./src/routes");
 import { Request, Response, NextFunction } from "express";
 import RequestHelper from "./src/utils/RequestHelper";
+import SwaggerHelper from "./src/utils/SwaggerHelper";
 import RedisWrapper from "./src/config/RedisWrapper";
 import { APIError } from "./src/utils/ErrorHandle";
+
 require("dotenv").config();
 
 const app = express();
@@ -18,6 +20,8 @@ app.listen(3000, () => {
 RequestHelper.initializeAxios();
 new RedisWrapper();
 routes(app);
+
+SwaggerHelper.initialize(app);
 
 app.use(
   async (error: APIError, req: Request, res: Response, next: NextFunction) => {
