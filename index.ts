@@ -15,10 +15,12 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 
-app.listen(3000, () => {
-  console.log("Server Started");
-  console.log("Example from dotenv: ", process.env.DB_USER);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(3000, () => {
+    console.log("Server Started");
+    console.log("Example from dotenv: ", process.env.DB_USER);
+  });
+}
 
 RequestHelper.initializeAxios();
 new RedisWrapper();
