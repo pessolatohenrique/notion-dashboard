@@ -1,6 +1,7 @@
 import { Router } from "express";
-import searchRoutes from "./search";
+
 import databaseRoutes from "./database";
+import searchRoutes from "./search";
 import statisticRoutes from "./statistic";
 const bodyParser = require("body-parser");
 

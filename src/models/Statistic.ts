@@ -1,15 +1,16 @@
 import axios from "axios";
-import { Printable } from "../interface/Printable";
-import { Database } from "./Database";
+
 import {
-  DatabaseResult,
+  DatabaseGroupItem,
   DatabaseOptionsItem,
   DatabaseQueryResult,
-  DatabaseGroupItem,
+  DatabaseResult,
   DatabaseSummarized,
 } from "../interface/Database";
+import { Printable } from "../interface/Printable";
 import { SearchParams } from "../interface/SearchParams";
 import AgroupHelper from "../utils/AgroupHelper";
+import { Database } from "./Database";
 
 export class Statistic implements Printable {
   private _response: DatabaseSummarized = {
@@ -18,7 +19,7 @@ export class Statistic implements Printable {
 
   private databaseModel = new Database();
 
-  async generate(id: String): Promise<void> {
+  async generate(id: string): Promise<void> {
     const databaseModel = new Database();
     await databaseModel.search(id);
     const databaseResponse = databaseModel.response;

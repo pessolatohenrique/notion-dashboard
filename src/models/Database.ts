@@ -1,10 +1,11 @@
 import axios from "axios";
-import { Printable } from "../interface/Printable";
+
 import {
+  DatabasePropertyItem,
   DatabaseResponse,
   DatabaseResult,
-  DatabasePropertyItem,
 } from "../interface/Database";
+import { Printable } from "../interface/Printable";
 import { APIError } from "../utils/ErrorHandle";
 
 export class Database implements Printable {
@@ -15,7 +16,7 @@ export class Database implements Printable {
     archived: false,
   };
 
-  async search(id: String): Promise<void> {
+  async search(id: string): Promise<void> {
     try {
       const apiResponse = await axios.get(`/databases/${id}`);
       const dataResponse: DatabaseResult = apiResponse.data;
@@ -46,7 +47,7 @@ export class Database implements Printable {
     const dataResponseList: Array<DatabasePropertyItem> = [];
     const dataResponseCopy: DatabaseResult = Object.assign({}, dataResponse);
 
-    for (let key in dataResponse.properties) {
+    for (const key in dataResponse.properties) {
       dataResponse.properties[key].property_name = key;
       if (dataResponse.properties[key].type === "select") {
         dataResponse.properties[key].property_value =

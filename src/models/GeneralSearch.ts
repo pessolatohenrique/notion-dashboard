@@ -1,7 +1,8 @@
 import axios from "axios";
+
 import { Printable } from "../interface/Printable";
 import { SearchParams } from "../interface/SearchParams";
-import { SearchResponse, ItemResult } from "../interface/SearchResponse";
+import { ItemResult, SearchResponse } from "../interface/SearchResponse";
 import { APIError } from "../utils/ErrorHandle";
 
 export class GeneralSearch implements Printable {

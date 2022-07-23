@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import { GeneralSearch } from "../models/GeneralSearch";
-import { LogGenerator } from "../utils/LogGenerator";
+import { NextFunction, Request, Response } from "express";
+
 import RedisWrapper from "../config/RedisWrapper";
 import { SearchResponse } from "../interface/SearchResponse";
+import { GeneralSearch } from "../models/GeneralSearch";
+import { LogGenerator } from "../utils/LogGenerator";
 
 export class SearchController {
   static async index(req: Request, res: Response, next: NextFunction) {
