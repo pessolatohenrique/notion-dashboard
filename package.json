@@ -7,7 +7,9 @@
     "start": "concurrently \"npm run watch\" \"npm run server\"",
     "watch": "tsc -w",
     "server": "npx ts-node-dev index.ts",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .ts ."
   },
   "keywords": [
     "template",

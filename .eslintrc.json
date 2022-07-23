@@ -10,7 +10,7 @@
     "sourceType": "module"
   },
   "plugins": ["prettier", "@typescript-eslint", "simple-import-sort"],
-  "ignorePatterns": "build",
+  "ignorePatterns": ["build", "dist"],
   "rules": {
     "prettier/prettier": "error",
     "simple-import-sort/imports": "error",

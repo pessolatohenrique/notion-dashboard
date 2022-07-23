@@ -46,3 +46,13 @@ Criar arquivo .env.test e configurar as variáveis de ambiente, semelhantes ao a
 Execute os testes disponíveis, por meio do comando:
 
     npm run test
+
+### Análise estática com ESLint
+
+Para verificar os trechos de código que precisam ser revistos via análise estática, execute o comando:
+
+    npm run lint
+
+Para corrigir automaticamente os pontos da análise estática, execute o comando:
+
+    npm run lint:fix
