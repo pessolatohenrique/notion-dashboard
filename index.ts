@@ -3,12 +3,15 @@ const cors = require("cors");
 const routes = require("./src/routes");
 import log4js = require("log4js");
 
-import { Request, Response, NextFunction } from "express";
-import RequestHelper from "./src/utils/RequestHelper";
-import SwaggerHelper from "./src/utils/SwaggerHelper";
-import LoggerHelper from "./src/utils/LoggerHelper";
-import RedisWrapper from "./src/config/RedisWrapper";
-import { APIError } from "./src/utils/ErrorHandle";
+import { NextFunction, Request, Response } from "express";
+
+import { RedisWrapper } from "./src/config";
+import {
+  APIError,
+  LoggerHelper,
+  RequestHelper,
+  SwaggerHelper,
+} from "./src/utils";
 
 require("dotenv").config();
 

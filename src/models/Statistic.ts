@@ -6,10 +6,10 @@ import {
   DatabaseQueryResult,
   DatabaseResult,
   DatabaseSummarized,
-} from "../interface/Database";
-import { Printable } from "../interface/Printable";
-import { SearchParams } from "../interface/SearchParams";
-import AgroupHelper from "../utils/AgroupHelper";
+  Printable,
+  SearchParams,
+} from "../interface";
+import { AgroupHelper } from "../utils";
 import { Database } from "./Database";
 
 export class Statistic implements Printable {

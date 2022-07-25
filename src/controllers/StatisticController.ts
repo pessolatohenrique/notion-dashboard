@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import RedisWrapper from "../config/RedisWrapper";
-import { DatabaseSummarized } from "../interface/Database";
-import { DetailRequest } from "../interface/DetailRequest";
-import { Statistic } from "../models/Statistic";
+import { RedisWrapper } from "../config";
+import { DatabaseSummarized, DetailRequest } from "../interface";
+import { Statistic } from "../models";
 import log4js = require("log4js");
 
 export class StatisticController {

@@ -1,4 +1,4 @@
-import { Printable } from "../interface/Printable";
+import { Printable } from "../interface";
 
 export class LogGenerator {
   public static printOut(...objects: Printable[]): void {

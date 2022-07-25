@@ -1,5 +1,3 @@
-import { NextFunction } from "express";
-
 class BaseError extends Error {
   public readonly name: string;
   public readonly status: number;

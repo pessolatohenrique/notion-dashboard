@@ -4,9 +4,9 @@ import {
   DatabasePropertyItem,
   DatabaseResponse,
   DatabaseResult,
-} from "../interface/Database";
-import { Printable } from "../interface/Printable";
-import { APIError } from "../utils/ErrorHandle";
+  Printable,
+} from "../interface";
+import { APIError } from "../utils";
 
 export class Database implements Printable {
   private _response: DatabaseResponse = {

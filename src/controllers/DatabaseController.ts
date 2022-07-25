@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import { DetailRequest } from "../interface/DetailRequest";
-import { Database } from "../models/Database";
-import { LogGenerator } from "../utils/LogGenerator";
+import { DetailRequest } from "../interface";
+import { Database } from "../models";
+import { LogGenerator } from "../utils";
 
 export class DatabaseController {
   static async show(
