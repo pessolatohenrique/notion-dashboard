@@ -1,6 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const routes = require("./src/routes");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("dotenv").config();
+
+import * as cors from "cors";
+import * as express from "express";
+
+import RoutesWrapper from "./src/routes";
 import log4js = require("log4js");
 
 import { NextFunction, Request, Response } from "express";
@@ -12,8 +16,6 @@ import {
   RequestHelper,
   SwaggerHelper,
 } from "./src/utils";
-
-require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV !== "test") {
 
 RequestHelper.initializeAxios();
 new RedisWrapper();
-routes(app);
+RoutesWrapper.configure(app);
 
 SwaggerHelper.initialize(app);
 LoggerHelper.initialize();
