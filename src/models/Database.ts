@@ -19,6 +19,7 @@ export class Database implements Printable {
   async search(id: string): Promise<void> {
     try {
       const apiResponse = await axios.get(`/databases/${id}`);
+
       const dataResponse: DatabaseResult = apiResponse.data;
 
       const dataResponseFiltered = this.filterTypeSelect(dataResponse);
