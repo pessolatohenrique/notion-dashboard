@@ -56,3 +56,4 @@ Para verificar os trechos de código que precisam ser revistos via análise est�
 Para corrigir automaticamente os pontos da análise estática, execute o comando:
 
     npm run lint:fix
+
