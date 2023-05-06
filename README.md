@@ -47,6 +47,14 @@ Execute os testes disponíveis, por meio do comando:
 
     npm run test
 
+Caso queira executar os testes unitários, execute o seguinte comando:
+
+    npm run test:unit
+
+Caso queira executar os testes integrados, execute o seguinte comando:
+
+    npm run test:integration
+
 ### Análise estática com ESLint
 
 Para verificar os trechos de código que precisam ser revistos via análise estática, execute o comando:
@@ -56,3 +64,17 @@ Para verificar os trechos de código que precisam ser revistos via análise est�
 Para corrigir automaticamente os pontos da análise estática, execute o comando:
 
     npm run lint:fix
+
+### Sonarqube - Análise estática e qualidade do código-fonte
+
+É possível verificar sobre a qualidade do código utilizando o Sonarqube. Para isso, suba uma instância do Sonarqube via sistema operacional ou Docker, e execute o seguinte comando:
+
+    docker run \
+    --rm \
+    -e SONAR_HOST_URL="<DOCKER-IP>:9000" \
+    -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=notion-dashboard \
+    -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info  \
+    -Dsonar.exclusions=**/src/routes/**,**/src/redis/**,**/src/config/**,**/__tests__/**,**/__mocks__/**,**/src/middlewares/**,**/src/seeders/**,**/src/migrations/**,**/dist/**,**/index.js,**/jest.config.js" \
+    -e SONAR_TOKEN="<GENERATED-TOKEN>" \
+    -v "$(pwd):/usr/src" \
+    sonarsource/sonar-scanner-cli
