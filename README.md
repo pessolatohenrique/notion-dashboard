@@ -18,6 +18,12 @@ Para utilizar os recursos em cache, é necessário uma configuração-base do [R
 - Express
 - Redis
 
+### Resultado do Sonarqube - análise estática e qualidade de código
+
+A imagem abaixo demonstra o resultado obtido via Sonarqube para o projeto
+
+![Resultado do Sonarqube](https://raw.githubusercontent.com/pessolatohenrique/notion-dashboard/main/resultsonar.png)
+
 ### Instalação do projeto (sem o docker)
 
 Acesse a pasta do projeto e rode o comando para instalar as dependências npm:
