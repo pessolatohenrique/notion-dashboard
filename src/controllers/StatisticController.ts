@@ -4,6 +4,7 @@ import { RedisWrapper } from "../config";
 import { DatabaseSummarized, DetailRequest } from "../interface";
 import { Statistic } from "../models";
 import log4js = require("log4js");
+import { StatisticProxy } from "../models/StatisticProxy";
 
 export class StatisticController {
   static async index(
@@ -12,29 +13,18 @@ export class StatisticController {
     next: NextFunction
   ) {
     try {
-      const statisticModel = new Statistic();
-      const logger = log4js.getLogger();
+      const statisticProxy = new StatisticProxy();
 
       const { fromCache } = req.query;
-      const redisWrapper = new RedisWrapper<DatabaseSummarized>();
+      const { id } = req.params;
 
-      const cacheKey = `notion:statistic:${req.params.id}`;
-      const cacheValue = await redisWrapper.isResultInCache(
-        Boolean(fromCache),
-        cacheKey
-      );
+      const fromCacheBoolean = Boolean(fromCache);
 
-      if (cacheValue) {
-        const cacheValueParsed = JSON.parse(cacheValue);
-        return res.status(200).json(cacheValueParsed);
-      }
+      const result = await statisticProxy.generate(id, fromCacheBoolean);
 
-      await statisticModel.generate(req.params.id);
-      redisWrapper.setWithParse(cacheKey, statisticModel.response);
-
-      logger.info(statisticModel.response);
-      return res.status(200).json(statisticModel.response);
+      return res.status(200).json(result);
     } catch (error) {
+      console.log("error:", error);
       return next(error);
     }
   }
