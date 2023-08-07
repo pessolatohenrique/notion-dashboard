@@ -21,7 +21,8 @@ const app = express();
 app.use(cors());
 
 if (process.env.NODE_ENV !== "test") {
-  app.listen(3000, () => {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
     console.log("Server Started");
     console.log("Example from dotenv: ", process.env.DB_USER);
   });
