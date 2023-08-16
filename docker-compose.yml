@@ -1,9 +1,24 @@
-version: "3"
+version: "3.9"
 services:
   web:
-    container_name: node_basic
-    build: .
+    container_name: notion_dashboard_web
+    image: pessolatohenrique/notion-dashboard:1.0.0
     ports:
-      - "3000:3000"
+      - 3000:3000
+    networks:
+      - compose-bridge
     volumes:
       - .:/var/www/html
+    depends_on:
+      - redis
+  redis:
+    container_name: notion_dashboard_redis
+    image: redis:6.0.20
+    ports:
+      - 6379:6379
+    networks:
+      - compose-bridge
+
+networks:
+  compose-bridge:
+    driver: bridge
